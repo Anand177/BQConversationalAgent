@@ -20,7 +20,7 @@ repair_type_dict = {
     'I': 'C',   'I': 'F',   'C': 'W',   'A': 'A',   'I': 'W',   'N': 'C',   'E': 'W'
 }
 
-labor_op_code_dict = {
+labour_op_code_dict = {
     '13529989' : 'GREEN BATTERY GBATT',
     '99P' : '3PERFORM MULTI-POINT INSPECTION',
     'GTIRE' : 'GREEN TIRE',
@@ -135,8 +135,8 @@ ro_labour_service_sequence_number_list  : list[int] = []
 ro_labour_original_repair_type_code_list : list[str] = []
 ro_labour_derived_repair_type_code_list : list[str] = []
 ro_labour_react_category_code_list : list[str] = []
-ro_labour_original_labor_op_code_list : list[str] = []
-ro_labour_standard_labor_op_code_list : list[str] = []
+ro_labour_original_labour_op_code_list : list[str] = []
+ro_labour_standard_labour_op_code_list : list[str] = []
 ro_labour_service_hours_list : list[float] = []
 ro_labour_customer_paid_labour_amount_list : list[float] = []
 
@@ -227,9 +227,9 @@ for i in range(num_rows):
       ro_labour_derived_repair_type_code_list.append(repair_type_dict[repair_type])
       ro_labour_react_category_code_list.append(f"{random.randint(11, 20)}")
 
-      labor_op_code = random.choice(list(labor_op_code_dict.keys()))
-      ro_labour_standard_labor_op_code_list.append(labor_op_code)
-      ro_labour_original_labor_op_code_list.append(labor_op_code_dict.get(labor_op_code))
+      labour_op_code = random.choice(list(labour_op_code_dict.keys()))
+      ro_labour_standard_labour_op_code_list.append(labour_op_code)
+      ro_labour_original_labour_op_code_list.append(labour_op_code_dict.get(labour_op_code))
       ro_labour_service_hours_list.append(round(random.uniform(0.1, 4.0), 1))
 
       labor_amount : float = round(random.uniform(0, 10.0), 2)
@@ -337,8 +337,8 @@ print(len(ro_labour_service_sequence_number_list))
 print(len(ro_labour_original_repair_type_code_list))
 print(len(ro_labour_derived_repair_type_code_list))
 print(len(ro_labour_react_category_code_list))
-print(len(ro_labour_original_labor_op_code_list))
-print(len(ro_labour_standard_labor_op_code_list))
+print(len(ro_labour_original_labour_op_code_list))
+print(len(ro_labour_standard_labour_op_code_list))
 print(len(ro_labour_service_hours_list))
 print(len(ro_labour_customer_paid_labour_amount_list))
 print(len(ro_part_country_list))
@@ -355,111 +355,112 @@ print(len(ro_part_packed_part_code_list))
 print(len(ro_part_customer_paid_part_amount_list))
 
 ro_header_data = {
-   'ro_header_country' : ro_header_country_list,
-    'ro_header_dealer' : ro_header_dealer_list,
-    'ro_header_dealer_sub_code' : ro_header_dealer_sub_code_list,
-    'ro_header_ro' : ro_header_ro_list,
-    'ro_header_open_date' : ro_header_open_date_list,
-    'ro_header_close_date' : ro_header_close_date_list,
-    'ro_header_process_date' : ro_header_process_date_list,
-    'ro_header_skip_flag' : ro_header_skip_flag_list,
-    'ro_header_vin' : ro_header_vin_list,
-    'ro_header_customer_flag' : ro_header_customer_flag_list,
-    'ro_header_customer_first_name' : ro_header_customer_first_name_list,
-    'ro_header_customer_last_name' : ro_header_customer_last_name_list,
-    'ro_header_customer_address_1' : ro_header_customer_address_1_list,
-    'ro_header_customer_address_2' : ro_header_customer_address_2_list,
-    'ro_header_customer_city' : ro_header_customer_city_list,
-    'ro_header_customer_state' : ro_header_customer_state_list,
-    'ro_header_customer_zip' : ro_header_customer_zip_list,
-    'ro_header_customer_country' : ro_header_customer_country_list,
-    'ro_header_customer_home_phone' : ro_header_customer_home_phone_list,
-    'ro_header_customer_work_phone' : ro_header_customer_work_phone_list,
-    'ro_header_customer_cell_phone' : ro_header_customer_cell_phone_list,
-    'ro_header_customer_sms_phone' : ro_header_customer_sms_phone_list,
-    'ro_header_customer_mms_phone' : ro_header_customer_mms_phone_list,
-    'ro_header_customer_email' : ro_header_customer_email_list,
-    'ro_header_service_advisor_code' : ro_header_service_advisor_code_list,
-    'ro_header_customer_type' : ro_header_customer_type_list,
-    'ro_header_derived_customer_type' : ro_header_derived_customer_type_list,
-    'ro_header_odometer_reading' : ro_header_odometer_reading_list,
-    'ro_header_odometer_code' : ro_header_odometer_code_list,
-    'ro_header_customer_paid_part_amount' : ro_header_customer_paid_part_amount_list,
-    'ro_header_customer_paid_labour_amount' : ro_header_customer_paid_labour_amount_list,
-    'ro_header_customer_paid_misc_amount' : ro_header_customer_paid_misc_amount_list,
-    'ro_header_customer_paid_tax_amount' : ro_header_customer_paid_tax_amount_list,
-    'ro_header_customer_paid_net_amount' : ro_header_customer_paid_net_amount_list,
-    'ro_header_total_part_amount' : ro_header_total_part_amount_list,
-    'ro_header_total_labour_amount' : ro_header_total_labour_amount_list,
-    'ro_header_total_misc_amount' : ro_header_total_misc_amount_list,
-    'ro_header_total_tax_amount' : ro_header_total_tax_amount_list,
-    'ro_header_total_net_amount' : ro_header_total_net_amount_list
+    'country_code' : ro_header_country_list,
+    'dealer_code' : ro_header_dealer_list,
+    'dealer_sub_code' : ro_header_dealer_sub_code_list,
+    'ro_number' : ro_header_ro_list,
+    'ro_open_date' : ro_header_open_date_list,
+    'ro_close_date' : ro_header_close_date_list,
+    'ro_process_date' : ro_header_process_date_list,
+    'skip_flag' : ro_header_skip_flag_list,
+    'vin' : ro_header_vin_list,
+    'customer_flag' : ro_header_customer_flag_list,
+    'customer_first_name' : ro_header_customer_first_name_list,
+    'customer_last_name' : ro_header_customer_last_name_list,
+    'customer_address_1' : ro_header_customer_address_1_list,
+    'customer_address_2' : ro_header_customer_address_2_list,
+    'customer_city' : ro_header_customer_city_list,
+    'customer_state' : ro_header_customer_state_list,
+    'customer_zip' : ro_header_customer_zip_list,
+    'customer_country' : ro_header_customer_country_list,
+    'customer_home_phone' : ro_header_customer_home_phone_list,
+    'customer_work_phone' : ro_header_customer_work_phone_list,
+    'customer_cell_phone' : ro_header_customer_cell_phone_list,
+    'customer_sms_phone' : ro_header_customer_sms_phone_list,
+    'customer_mms_phone' : ro_header_customer_mms_phone_list,
+    'customer_email' : ro_header_customer_email_list,
+    'service_advisor_code' : ro_header_service_advisor_code_list,
+    'customer_type' : ro_header_customer_type_list,
+    'derived_customer_type' : ro_header_derived_customer_type_list,
+    'odometer_reading' : ro_header_odometer_reading_list,
+    'odometer_code' : ro_header_odometer_code_list,
+    'customer_paid_part_amount' : ro_header_customer_paid_part_amount_list,
+    'customer_paid_labour_amount' : ro_header_customer_paid_labour_amount_list,
+    'customer_paid_misc_amount' : ro_header_customer_paid_misc_amount_list,
+    'customer_paid_tax_amount' : ro_header_customer_paid_tax_amount_list,
+    'customer_paid_net_amount' : ro_header_customer_paid_net_amount_list,
+    'total_part_amount' : ro_header_total_part_amount_list,
+    'total_labour_amount' : ro_header_total_labour_amount_list,
+    'total_misc_amount' : ro_header_total_misc_amount_list,
+    'total_tax_amount' : ro_header_total_tax_amount_list,
+    'total_net_amount' : ro_header_total_net_amount_list
 }
 
 ro_labour_data = {
-    'ro_labour_country' : ro_labour_country_list,
-    'ro_labour_dealer' : ro_labour_dealer_list,
-    'ro_labour_dealer_sub_code' : ro_labour_dealer_sub_code_list,
-    'ro_labour_ro' : ro_labour_ro_list,
-    'ro_labour_open_date' : ro_labour_open_date_list,
-    'ro_labour_close_date' : ro_labour_close_date_list,
-    'ro_labour_process_date' : ro_labour_process_date_list,
-    'ro_labour_skip_flag' : ro_labour_skip_flag_list,
-    'ro_labour_service_job_number' : ro_labour_service_job_number_list,
-    'ro_labour_service_sequence_number' : ro_labour_service_sequence_number_list,
-    'ro_labour_original_repair_type_code' : ro_labour_original_repair_type_code_list,
-    'ro_labour_derived_repair_type_code' : ro_labour_derived_repair_type_code_list,
-    'ro_labour_react_category_code' : ro_labour_react_category_code_list,
-    'ro_labour_original_labor_op_code' : ro_labour_original_labor_op_code_list,
-    'ro_labour_standard_labor_op_code' : ro_labour_standard_labor_op_code_list,
-    'ro_labour_service_hours' : ro_labour_service_hours_list,
-    'ro_labour_customer_paid_labour_amount' : ro_labour_customer_paid_labour_amount_list
+    'country_code' : ro_labour_country_list,
+    'dealer_code' : ro_labour_dealer_list,
+    'dealer_sub_code' : ro_labour_dealer_sub_code_list,
+    'ro_number' : ro_labour_ro_list,
+    'ro_open_date' : ro_labour_open_date_list,
+    'ro_close_date' : ro_labour_close_date_list,
+    'ro_process_date' : ro_labour_process_date_list,
+    'skip_flag' : ro_labour_skip_flag_list,
+    'service_job_number' : ro_labour_service_job_number_list,
+    'service_sequence_number' : ro_labour_service_sequence_number_list,
+    'original_repair_type_code' : ro_labour_original_repair_type_code_list,
+    'derived_repair_type_code' : ro_labour_derived_repair_type_code_list,
+    'react_category_code' : ro_labour_react_category_code_list,
+    'original_labour_op_code' : ro_labour_original_labour_op_code_list,
+    'standard_labour_op_code' : ro_labour_standard_labour_op_code_list,
+    'service_hours' : ro_labour_service_hours_list,
+    'customer_paid_labour_amount' : ro_labour_customer_paid_labour_amount_list
 }
 
 ro_part_data = {
-    'ro_part_country' : ro_part_country_list,
-    'ro_part_dealer' : ro_part_dealer_list,
-    'ro_part_dealer_sub_code' : ro_part_dealer_sub_code_list,
-    'ro_part_ro' : ro_part_ro_list,
-    'ro_part_open_date' : ro_part_open_date_list,
-    'ro_part_close_date' : ro_part_close_date_list,
-    'ro_part_process_date' : ro_part_process_date_list,
-    'ro_part_skip_flag' : ro_part_skip_flag_list,
-    'ro_part_service_job_number' : ro_part_service_job_number_list,
-    'ro_part_service_sequence_number' : ro_part_service_sequence_number_list,
-    'ro_part_packed_part_code' : ro_part_packed_part_code_list,
-    'ro_part_customer_paid_part_amount' : ro_part_customer_paid_part_amount_list
+    'country_code' : ro_part_country_list,
+    'dealer_code' : ro_part_dealer_list,
+    'dealer_sub_code' : ro_part_dealer_sub_code_list,
+    'ro_number' : ro_part_ro_list,
+    'ro_open_date' : ro_part_open_date_list,
+    'ro_close_date' : ro_part_close_date_list,
+    'ro_process_date' : ro_part_process_date_list,
+    'skip_flag' : ro_part_skip_flag_list,
+    'service_job_number' : ro_part_service_job_number_list,
+    'service_sequence_number' : ro_part_service_sequence_number_list,
+    'part_sequence_number' : ro_part_part_sequence_number_list,
+    'packed_part_code' : ro_part_packed_part_code_list,
+    'customer_paid_part_amount' : ro_part_customer_paid_part_amount_list
 }
 
 ro_header_df = pd.DataFrame(ro_header_data)
 ro_labour_df = pd.DataFrame(ro_labour_data)
 ro_part_df = pd.DataFrame(ro_part_data)
 
-ro_header_df = ro_header_df.astype({"ro_header_country": "string", "ro_header_dealer": "string", 
-                "ro_header_dealer_sub_code": "string", "ro_header_ro": "string", 
-                "ro_header_skip_flag": "string", "ro_header_vin": "string", 
-                "ro_header_customer_flag": "string", "ro_header_customer_first_name": "string", 
-                "ro_header_customer_last_name": "string", "ro_header_customer_address_1": "string", 
-                "ro_header_customer_address_2": "string", "ro_header_customer_city": "string", 
-                "ro_header_customer_state": "string", "ro_header_customer_zip": "string", 
-                "ro_header_customer_country": "string", "ro_header_customer_home_phone": "string", 
-                "ro_header_customer_work_phone": "string", "ro_header_customer_cell_phone": "string", 
-                "ro_header_customer_sms_phone": "string", "ro_header_customer_mms_phone": "string", 
-                "ro_header_customer_email": "string", "ro_header_service_advisor_code": "string", 
-                "ro_header_customer_type": "string", "ro_header_derived_customer_type": "string", 
-                "ro_header_odometer_code": "string"})
+ro_header_df = ro_header_df.astype({"country_code": "string", "dealer_code": "string", 
+                "dealer_sub_code": "string", "ro_number": "string", "ro_open_date" : "string", 
+                "ro_close_date" : "string", "ro_process_date" : "string", "skip_flag": "string", 
+                "vin": "string", "customer_flag": "string", "customer_first_name": "string", 
+                "customer_last_name": "string", "customer_address_1": "string", 
+                "customer_address_2": "string", "customer_city": "string", 
+                "customer_state": "string", "customer_zip": "string", "customer_country": "string", 
+                "customer_home_phone": "string", "customer_work_phone": "string", 
+                "customer_cell_phone": "string", "customer_sms_phone": "string", 
+                "customer_mms_phone": "string", "customer_email": "string", 
+                "service_advisor_code": "string", "customer_type": "string", 
+                "derived_customer_type": "string", "odometer_code": "string"})
 
-ro_labour_df = ro_labour_df.astype({"ro_labour_country": "string", "ro_labour_dealer": "string",
-                "ro_labour_dealer_sub_code": "string", "ro_labour_ro": "string",
-                "ro_labour_skip_flag" : "string", "ro_labour_original_repair_type_code": "string",
-                "ro_labour_derived_repair_type_code": "string", 
-                "ro_labour_react_category_code": "string", "ro_labour_original_labor_op_code": "string",
-                "ro_labour_standard_labor_op_code": "string"})
 
-ro_part_df = ro_part_df.astype({"ro_part_country": "string","ro_part_dealer": "string",
-                "ro_part_dealer_sub_code": "string", "ro_part_ro" : "string",
-                "ro_part_skip_flag": "string", "ro_part_packed_part_code": "string"})
+ro_labour_df = ro_labour_df.astype({"country_code": "string", "dealer_code": "string",
+                "dealer_sub_code": "string", "ro_number": "string", "ro_open_date" : "string", 
+                "ro_close_date" : "string", "ro_process_date" : "string",
+                "skip_flag" : "string", "original_repair_type_code": "string",
+                "derived_repair_type_code": "string", "react_category_code": "string", 
+                "original_labour_op_code": "string", "standard_labour_op_code": "string"})
 
+ro_part_df = ro_part_df.astype({"country_code": "string","dealer_code": "string",
+                "dealer_sub_code": "string", "ro_number" : "string", "ro_open_date" : "string", 
+                "ro_close_date" : "string", "ro_process_date" : "string",
+                "skip_flag": "string", "packed_part_code": "string"})
 
 
 print(ro_header_df.info())
