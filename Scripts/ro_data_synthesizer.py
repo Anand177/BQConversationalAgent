@@ -460,14 +460,6 @@ ro_part_df = ro_part_df.astype({"ro_part_country": "string","ro_part_dealer": "s
                 "ro_part_dealer_sub_code": "string", "ro_part_ro" : "string",
                 "ro_part_skip_flag": "string", "ro_part_packed_part_code": "string"})
 
-ro_header_df = ro_header_df.astype({"ro_header_open_date": "datetime64[ns]", 
-                "ro_header_close_date" : "datetime64[ns]", "ro_header_process_date" : "datetime64[ns]"})
-
-ro_labour_df = ro_labour_df.astype({"ro_labour_open_date": "datetime64[ns]", 
-                "ro_labour_close_date" : "datetime64[ns]", "ro_labour_process_date" : "datetime64[ns]"})
-
-ro_part_df = ro_part_df.astype({"ro_part_open_date": "datetime64[ns]", 
-                "ro_part_close_date" : "datetime64[ns]", "ro_part_process_date" : "datetime64[ns]"})
 
 
 print(ro_header_df.info())
