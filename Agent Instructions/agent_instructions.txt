@@ -1,0 +1,75 @@
+
+SCHEMA OVERVIEW
+----------------
+You have access to three BigQuery tables in `gcp-project-375309.dealer_information`:
+
+- repair_order_header  -> One row per repair order (RO). PARENT table / default starting table.
+- repair_order_labour  -> One row per service line (job + sequence). CHILD of header.
+- repair_order_part    -> One row per part used on a labour line. CHILD of labour (grandchild of header).
+
+RELATIONSHIPS & JOIN KEYS
+--------------------------
+repair_order_header (1) ──< repair_order_labour (N) ──< repair_order_part (0..N)
+
+- header -> labour : country_code, dealer_code, ro_number, ro_open_date
+- labour -> part   : country_code, dealer_code, ro_number, ro_open_date, service_job_number, service_sequence_number
+
+Always join using the FULL composite key listed above for each relationship — never join on a
+partial key (e.g. ro_number alone), since ro_number is only unique within country_code +
+dealer_code (+ dealer_sub_code).
+
+To reach repair_order_header fields from repair_order_part, join THROUGH repair_order_labour
+(part has no direct foreign key to header).
+
+CORE QUERY RULES
+-----------------
+1. Default starting table: Every query should start from repair_order_header and join outward
+   to repair_order_labour and/or repair_order_part as needed — UNLESS the user explicitly asks
+   to query only labour data or only part data, in which case start from repair_order_labour or
+   repair_order_part respectively.
+
+2. Table identity:
+   - repair_order_labour = the LABOUR table (service lines, labour hours, labour op codes)
+   - repair_order_part   = the PART table (parts used, part codes)
+
+3. Hierarchy: repair_order_header is the parent. repair_order_labour is its child (1:N).
+   repair_order_part is a child of repair_order_labour (1:0..N), not a direct child of the header.
+
+4. skip_flag filtering: Every query must exclude skipped records from EVERY table referenced in
+   the query. Apply this filter to each table individually, e.g.:
+
+   WHERE (UPPER(h.skip_flag) != 'Y')
+     AND (UPPER(l.skip_flag) != 'Y')
+     AND (UPPER(p.skip_flag) != 'Y')
+
+   Only include the clause for tables actually joined in the query. Treat skip_flag as
+   case-insensitive (Y/y).
+
+TERM MAPPING & NORMALIZATION
+------------------------------
+5. Repair Order Number: If the user says "Repair Order Number", "RO number", "ro num", "RO", or
+   similar phrasing paired with an alphanumeric value, map it to the ro_number column.
+
+6. RO number padding: ro_number is always 16 characters. If the user supplies a value shorter
+   than 16 characters, left-pad it with zeros to 16 characters before filtering
+   (e.g. user enters "12345" -> filter on "0000000000012345").
+
+7. Dealer Code: If the user says "dealer code", "dealer", "PA code", "agency", or "dealership",
+   map it to the dealer_code column.
+
+8. Dealer Sub Code — exclusion by default: Do NOT add dealer_sub_code to the WHERE clause unless
+   the user explicitly uses wording like "dealer sub code", "sub dealer", "sub code", or similar.
+   Do not infer a sub-code filter from a dealer code or RO number alone.
+
+ADDITIONAL GUARDRAILS (RECOMMENDED)
+--------------------------------------
+- Treat customer_* columns on repair_order_header as PII — avoid displaying raw PII (email,
+  phone, address) unless explicitly requested; prefer aggregated or masked output where possible.
+- Prefer derived_customer_type, derived_repair_type_code, and standard_labour_op_code over their
+  original_*/non-derived counterparts for cross-dealer consistency, unless the user asks for the
+  raw/original value.
+- Use ro_open_date as the primary date filter/partition column (tables are partitioned on it)
+  unless the user asks about close date or process/load date specifically.
+- When aggregating amounts across tables (e.g. reconciling customer_paid_labour_amount at labour
+  level vs. header level), be explicit about which grain the aggregation is performed at to avoid
+  double-counting.
